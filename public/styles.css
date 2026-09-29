@@ -1,0 +1,10 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 480px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+#login-links a {
+  display: inline-block;
+  margin-right: 1rem;
+}
