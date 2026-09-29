@@ -88,11 +88,12 @@ export async function onRequestGet(context) {
     }),
   });
 
-    if (!tokenResponse.ok) {
-    return new Response("Falha ao trocar o código por token", {
-      status: 400,
-    });
-  }
+       if (!tokenData.access_token || !/^bearer$/i.test(tokenData.token_type)) {
+      return new Response(
+        `Resposta de token inválida do GitHub. Corpo: ${JSON.stringify(tokenData)}`,
+        { status: 400 }
+      );
+    }
 
   const tokenData = await tokenResponse.json();
 
