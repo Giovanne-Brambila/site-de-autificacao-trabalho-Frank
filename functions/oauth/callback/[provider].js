@@ -88,10 +88,12 @@ export async function onRequestGet(context) {
     }),
   });
 
-  if (!tokenResponse.ok) {
-    return new Response("Falha ao trocar o código por token", {
-      status: 400,
-    });
+    if (!tokenResponse.ok) {
+    const errorBody = await tokenResponse.text();
+    return new Response(
+      `Falha ao trocar o código por token. Status: ${tokenResponse.status}. Corpo: ${errorBody}`,
+      { status: 400 }
+    );
   }
 
   const tokenData = await tokenResponse.json();
