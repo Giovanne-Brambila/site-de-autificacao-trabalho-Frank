@@ -89,17 +89,9 @@ export async function onRequestGet(context) {
   });
 
     if (!tokenResponse.ok) {
-    const errorBody = await tokenResponse.text();
-    const debugInfo = {
-      clientIdLength: clientId ? clientId.length : "undefined",
-      clientIdPreview: clientId ? clientId.slice(0, 10) : "undefined",
-      secretLength: clientSecret ? clientSecret.length : "undefined",
-      secretDefined: !!clientSecret,
-    };
-    return new Response(
-      `Falha ao trocar o código por token. Status: ${tokenResponse.status}. Corpo: ${errorBody}. Debug: ${JSON.stringify(debugInfo)}`,
-      { status: 400 }
-    );
+    return new Response("Falha ao trocar o código por token", {
+      status: 400,
+    });
   }
 
   const tokenData = await tokenResponse.json();
